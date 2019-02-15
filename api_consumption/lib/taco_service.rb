@@ -6,15 +6,22 @@ class TacoService
 
   def conn
     conn = Faraday.new(:url => 'http://taco-randomizer.herokuapp.com/')
-    binding.pry
   end
 
   def get_response(url)
     conn.get(url)
   end
 
+  def parse
+    response = get_response('/random/')
+    JSON.parse(response)
+    binding.pry
+    #evaluate from here what response is and if the parser is working,
+    # from there, run rspec.
+  end
+
   def random_ingredients
-    get_response('/random/')
+    parse
   end
 
   def random_taco
